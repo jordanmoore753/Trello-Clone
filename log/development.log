@@ -2878,3 +2878,1452 @@ Processing by Api::BoardsController#show as */*
 Completed 200 OK in 86ms (Views: 31.8ms | ActiveRecord: 12.1ms | Allocations: 22092)
 
 
+  [1m[36mCard Load (0.2ms)[0m  [1m[34mSELECT "cards".* FROM "cards" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4539074736204228780)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4539074736204228780)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (5007.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "reaction_development"[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (22.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "reaction_development"[0m
+  [1m[35m (19.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "reaction_test"[0m
+  [1m[35m (68.7ms)[0m  [1m[35mCREATE DATABASE "reaction_development" ENCODING = 'unicode'[0m
+  [1m[35m (70.9ms)[0m  [1m[35mCREATE DATABASE "reaction_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE[0m
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "title" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "cards" CASCADE[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "cards" ("id" bigserial primary key, "title" character varying, "due_date" timestamp, "labels" character varying[] DEFAULT '{}', "description" text, "list_id" bigint)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE  INDEX  "index_cards_on_list_id" ON "cards"  ("list_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "lists" CASCADE[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "title" character varying, "board_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE  INDEX  "index_lists_on_board_id" ON "lists"  ("board_id")[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20201006151922)[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20191028085449),
+(20201006151301);
+
+[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-10-06 17:12:23.206793"], ["updated_at", "2020-10-06 17:12:23.206793"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "396709a6ffcb8a2d76b6a5e5f4d63ae59e9d55d0"], ["created_at", "2020-10-06 17:12:23.215370"], ["updated_at", "2020-10-06 17:12:23.215370"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "boards" CASCADE[0m
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "title" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "cards" CASCADE[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "cards" ("id" bigserial primary key, "title" character varying, "due_date" timestamp, "labels" character varying[] DEFAULT '{}', "description" text, "list_id" bigint)[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE  INDEX  "index_cards_on_list_id" ON "cards"  ("list_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "lists" CASCADE[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "lists" ("id" bigserial primary key, "title" character varying, "board_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE  INDEX  "index_lists_on_board_id" ON "lists"  ("board_id")[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20201006151922)[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20191028085449),
+(20201006151301);
+
+[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-10-06 17:12:23.357232"], ["updated_at", "2020-10-06 17:12:23.357232"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-10-06 17:12:23.380519"], ["key", "environment"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "396709a6ffcb8a2d76b6a5e5f4d63ae59e9d55d0"], ["created_at", "2020-10-06 17:12:23.387970"], ["updated_at", "2020-10-06 17:12:23.387970"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBoard Create (0.5ms)[0m  [1m[32mINSERT INTO "boards" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "First board"], ["created_at", "2020-10-06 17:12:23.428434"], ["updated_at", "2020-10-06 17:12:23.428434"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mList Create (2.1ms)[0m  [1m[32mINSERT INTO "lists" ("title", "board_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "First List"], ["board_id", 1], ["created_at", "2020-10-06 17:12:23.443307"], ["updated_at", "2020-10-06 17:12:23.443307"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mList Create (0.4ms)[0m  [1m[32mINSERT INTO "lists" ("title", "board_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Second List"], ["board_id", 1], ["created_at", "2020-10-06 17:12:23.451947"], ["updated_at", "2020-10-06 17:12:23.451947"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (1.0ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "First Card"], ["description", "One card"], ["list_id", 1]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.5ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Second Card"], ["description", "Another card"], ["list_id", 1]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Third Card"], ["description", "One more card"], ["list_id", 2]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Fourth Card"], ["description", "Yet another card"], ["list_id", 2]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Fifth Card"], ["description", "Last card"], ["list_id", 2]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBoard Create (0.8ms)[0m  [1m[32mINSERT INTO "boards" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "First board"], ["created_at", "2020-10-06 17:12:31.472311"], ["updated_at", "2020-10-06 17:12:31.472311"]]
+  [1m[35m (3.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mList Create (0.5ms)[0m  [1m[32mINSERT INTO "lists" ("title", "board_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "First List"], ["board_id", 2], ["created_at", "2020-10-06 17:12:31.490619"], ["updated_at", "2020-10-06 17:12:31.490619"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mList Create (0.4ms)[0m  [1m[32mINSERT INTO "lists" ("title", "board_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Second List"], ["board_id", 2], ["created_at", "2020-10-06 17:12:31.496042"], ["updated_at", "2020-10-06 17:12:31.496042"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.7ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "First Card"], ["description", "One card"], ["list_id", 3]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Second Card"], ["description", "Another card"], ["list_id", 3]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.2ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Third Card"], ["description", "One more card"], ["list_id", 4]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.3ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Fourth Card"], ["description", "Yet another card"], ["list_id", 4]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCard Create (0.4ms)[0m  [1m[32mINSERT INTO "cards" ("title", "description", "list_id") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Fifth Card"], ["description", "Last card"], ["list_id", 4]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCard Load (0.3ms)[0m  [1m[34mSELECT "cards".* FROM "cards" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/boards/1" for ::1 at 2020-10-06 13:15:49 -0400
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/boards/1"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-10-06 13:16:58 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 74)
+Started GET "/api/boards" for ::1 at 2020-10-06 13:16:59 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 14.5ms | Allocations: 10831)
+Completed 200 OK in 21ms (Views: 11.5ms | ActiveRecord: 6.2ms | Allocations: 14400)
+
+
+[Webpacker] Compiling...
+Started GET "/" for ::1 at 2020-10-06 13:17:00 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 5)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 9999ms (Views: 9998.5ms | ActiveRecord: 0.0ms | Allocations: 10231)
+
+
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 11902ms (Views: 11900.7ms | ActiveRecord: 0.0ms | Allocations: 1924443)
+
+
+Started GET "/ui" for ::1 at 2020-10-06 13:17:17 -0400
+Processing by UiController#index as HTML
+  Rendering ui/index.html.erb within layouts/static
+  Rendered ui/index.html.erb within layouts/static (Duration: 0.9ms | Allocations: 780)
+Completed 200 OK in 27ms (Views: 25.8ms | ActiveRecord: 0.0ms | Allocations: 16281)
+
+
+Started GET "/ui/single_board" for ::1 at 2020-10-06 13:17:21 -0400
+Processing by UiController#single_board as HTML
+  Rendering ui/single_board.html.erb within layouts/static
+  Rendered ui/single_board.html.erb within layouts/static (Duration: 0.5ms | Allocations: 339)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.0ms | Allocations: 11972)
+
+
+Started GET "/images/admin-badge.png" for ::1 at 2020-10-06 13:17:21 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/admin-badge.png"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-10-06 13:21:15 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 2992ms (Views: 2991.8ms | ActiveRecord: 0.0ms | Allocations: 10225)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:21:30 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 13ms (Views: 12.8ms | ActiveRecord: 0.0ms | Allocations: 8831)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:21:43 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3058ms (Views: 3056.9ms | ActiveRecord: 0.0ms | Allocations: 10227)
+
+
+Started GET "/ui" for ::1 at 2020-10-06 13:22:05 -0400
+Processing by UiController#index as HTML
+  Rendering ui/index.html.erb within layouts/static
+  Rendered ui/index.html.erb within layouts/static (Duration: 0.5ms | Allocations: 552)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.0ms | Allocations: 12040)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:22:07 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 11.6ms | ActiveRecord: 0.0ms | Allocations: 8827)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:23:24 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3035ms (Views: 3034.4ms | ActiveRecord: 0.0ms | Allocations: 10225)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:23:27 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 4.4ms | Allocations: 916)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.8ms | Allocations: 1358)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:23:58 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3119ms (Views: 3118.2ms | ActiveRecord: 0.0ms | Allocations: 10228)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:24:01 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 1.7ms | Allocations: 859)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.3ms | Allocations: 1296)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:24:06 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (2.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 6.0ms | Allocations: 867)
+Completed 200 OK in 12ms (Views: 7.9ms | ActiveRecord: 2.1ms | Allocations: 1313)
+
+
+Started GET "/boards/1" for ::1 at 2020-10-06 13:25:33 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/boards/1"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/boards/1" for ::1 at 2020-10-06 13:25:35 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/boards/1"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/boards/2" for ::1 at 2020-10-06 13:25:36 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/boards/2"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/boards/1" for ::1 at 2020-10-06 13:25:36 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/boards/1"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/boards/2" for ::1 at 2020-10-06 13:25:37 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/boards/2"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-10-06 13:25:39 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+Hash: e2fb3a28cdf1c4256c18
+Version: webpack 4.44.2
+Time: 1975ms
+Built at: 10/06/2020 1:25:42 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-02e1f427074362aab16f.js    1.8 MiB  application  [emitted] [immutable]  application
+js/application-02e1f427074362aab16f.js.map   1.97 MiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-02e1f427074362aab16f.js js/application-02e1f427074362aab16f.js.map
+[./app/javascript/actions/BoardActions.js] 1020 bytes {application} [built]
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/constants/ActionTypes.js] 231 bytes {application} [built]
+[./app/javascript/constants/ApiRoutes.js] 89 bytes {application} [built]
+[./app/javascript/lib/ApiClient.js] 909 bytes {application} [built]
+[./app/javascript/lib/Store.js] 221 bytes {application} [built]
+[./app/javascript/packs/application.js] 1.86 KiB {application} [built]
+[./app/javascript/reducers/boards.js] 417 bytes {application} [built]
+[./app/javascript/reducers/rootReducer.js] 156 bytes {application} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 905 bytes {application} [built]
+[./node_modules/webpack/buildin/harmony-module.js] (webpack)/buildin/harmony-module.js 631 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 98 hidden modules
+
+ERROR in ./app/javascript/components/board/Board.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/will/Trello-Clone/app/javascript/components/board/Board.jsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (17:4)
+
+  15 |         <i class="sub-icon sm-icon"></i>Subscribed</div>
+  16 |     </header>
+> 17 |     <main>
+     |     ^
+  18 |         <div id="list-container" class="list-container">
+  19 |             <div id="existing-lists" class="existing-lists">
+  20 |                 <div class="list-wrapper">
+    at Object._raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:766:17)
+    at Object.raiseWithData (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:759:17)
+    at Object.raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:753:17)
+    at Object.jsxParseElementAt (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4696:18)
+    at Object.jsxParseElement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4706:17)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4713:19)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseMaybeAssignAllowIn (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:17)
+    at Object.parseParenAndDistinguishExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10473:28)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10177:21)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4718:20)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at Object.parseExpressionBase (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9564:23)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:17)
+    at Object.parseReturnStatement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11800:28)
+    at Object.parseStatementContent (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11479:21)
+ @ ./app/javascript/components/Application.jsx 8:0-34 38:15-20
+ @ ./app/javascript/packs/application.js
+
+Completed 200 OK in 3070ms (Views: 3069.1ms | ActiveRecord: 0.0ms | Allocations: 10151)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:25:49 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 10.8ms | ActiveRecord: 0.0ms | Allocations: 8833)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:26:18 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+Hash: 0a28d2b639b84b18f7dd
+Version: webpack 4.44.2
+Time: 1943ms
+Built at: 10/06/2020 1:26:21 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-b269571a4df8c9421b30.js   1.79 MiB  application  [emitted] [immutable]  application
+js/application-b269571a4df8c9421b30.js.map   1.97 MiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-b269571a4df8c9421b30.js js/application-b269571a4df8c9421b30.js.map
+[./app/javascript/actions/BoardActions.js] 1020 bytes {application} [built]
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/constants/ActionTypes.js] 231 bytes {application} [built]
+[./app/javascript/constants/ApiRoutes.js] 89 bytes {application} [built]
+[./app/javascript/lib/ApiClient.js] 909 bytes {application} [built]
+[./app/javascript/lib/Store.js] 221 bytes {application} [built]
+[./app/javascript/packs/application.js] 1.86 KiB {application} [built]
+[./app/javascript/reducers/boards.js] 417 bytes {application} [built]
+[./app/javascript/reducers/rootReducer.js] 156 bytes {application} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 905 bytes {application} [built]
+[./node_modules/webpack/buildin/harmony-module.js] (webpack)/buildin/harmony-module.js 631 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 98 hidden modules
+
+ERROR in ./app/javascript/components/board/Board.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/will/Trello-Clone/app/javascript/components/board/Board.jsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (17:4)
+
+  15 |         <i class="sub-icon sm-icon"></i>Subscribed</div>
+  16 |     </header>
+> 17 |     <main>
+     |     ^
+  18 |         <div id="list-container" class="list-container">
+  19 |             <div id="existing-lists" class="existing-lists">
+  20 |                 <div class="list-wrapper">
+    at Object._raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:766:17)
+    at Object.raiseWithData (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:759:17)
+    at Object.raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:753:17)
+    at Object.jsxParseElementAt (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4696:18)
+    at Object.jsxParseElement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4706:17)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4713:19)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseMaybeAssignAllowIn (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:17)
+    at Object.parseParenAndDistinguishExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10473:28)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10177:21)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4718:20)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at Object.parseExpressionBase (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9564:23)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:17)
+    at Object.parseReturnStatement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11800:28)
+    at Object.parseStatementContent (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11479:21)
+ @ ./app/javascript/components/Application.jsx 8:0-34
+ @ ./app/javascript/packs/application.js
+
+Completed 200 OK in 3019ms (Views: 3018.6ms | ActiveRecord: 0.0ms | Allocations: 10152)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:26:34 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 2922ms (Views: 2921.7ms | ActiveRecord: 0.0ms | Allocations: 10220)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:26:37 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 2.1ms | Allocations: 858)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.4ms | Allocations: 1299)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:27:26 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3096ms (Views: 3094.9ms | ActiveRecord: 0.0ms | Allocations: 10231)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:27:29 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 2.4ms | Allocations: 867)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.5ms | Allocations: 1319)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:27:44 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3042ms (Views: 3041.0ms | ActiveRecord: 0.0ms | Allocations: 10227)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:27:47 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.4ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 3.2ms | Allocations: 867)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.4ms | Allocations: 1312)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:28:39 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+Hash: e2f8ea98b76f795aedfc
+Version: webpack 4.44.2
+Time: 1981ms
+Built at: 10/06/2020 1:28:42 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a64f79e7830bdcd5d40b.js    1.8 MiB  application  [emitted] [immutable]  application
+js/application-a64f79e7830bdcd5d40b.js.map   1.97 MiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-a64f79e7830bdcd5d40b.js js/application-a64f79e7830bdcd5d40b.js.map
+[./app/javascript/actions/BoardActions.js] 1020 bytes {application} [built]
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/constants/ActionTypes.js] 231 bytes {application} [built]
+[./app/javascript/constants/ApiRoutes.js] 89 bytes {application} [built]
+[./app/javascript/lib/ApiClient.js] 909 bytes {application} [built]
+[./app/javascript/lib/Store.js] 221 bytes {application} [built]
+[./app/javascript/packs/application.js] 1.86 KiB {application} [built]
+[./app/javascript/reducers/boards.js] 417 bytes {application} [built]
+[./app/javascript/reducers/rootReducer.js] 156 bytes {application} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 905 bytes {application} [built]
+[./node_modules/webpack/buildin/harmony-module.js] (webpack)/buildin/harmony-module.js 631 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 98 hidden modules
+
+ERROR in ./app/javascript/components/board/Board.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/will/Trello-Clone/app/javascript/components/board/Board.jsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (17:4)
+
+  15 |         <i class="sub-icon sm-icon"></i>Subscribed</div>
+  16 |     </header>
+> 17 |     <main>
+     |     ^
+  18 |         <div id="list-container" class="list-container">
+  19 |             <div id="existing-lists" class="existing-lists">
+  20 |                 <div class="list-wrapper">
+    at Object._raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:766:17)
+    at Object.raiseWithData (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:759:17)
+    at Object.raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:753:17)
+    at Object.jsxParseElementAt (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4696:18)
+    at Object.jsxParseElement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4706:17)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4713:19)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseMaybeAssignAllowIn (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:17)
+    at Object.parseParenAndDistinguishExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10473:28)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10177:21)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4718:20)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at Object.parseExpressionBase (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9564:23)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:17)
+    at Object.parseReturnStatement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11800:28)
+    at Object.parseStatementContent (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11479:21)
+ @ ./app/javascript/components/Application.jsx 8:0-34 45:15-20
+ @ ./app/javascript/packs/application.js
+
+Completed 200 OK in 3057ms (Views: 3056.5ms | ActiveRecord: 0.0ms | Allocations: 10152)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:29:02 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+Hash: f11ee50d2ff395de8fce
+Version: webpack 4.44.2
+Time: 1969ms
+Built at: 10/06/2020 1:29:05 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-996355d73e3c442ec585.js    1.8 MiB  application  [emitted] [immutable]  application
+js/application-996355d73e3c442ec585.js.map   1.97 MiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-996355d73e3c442ec585.js js/application-996355d73e3c442ec585.js.map
+[./app/javascript/actions/BoardActions.js] 1020 bytes {application} [built]
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/constants/ActionTypes.js] 231 bytes {application} [built]
+[./app/javascript/constants/ApiRoutes.js] 89 bytes {application} [built]
+[./app/javascript/lib/ApiClient.js] 909 bytes {application} [built]
+[./app/javascript/lib/Store.js] 221 bytes {application} [built]
+[./app/javascript/packs/application.js] 1.86 KiB {application} [built]
+[./app/javascript/reducers/boards.js] 417 bytes {application} [built]
+[./app/javascript/reducers/rootReducer.js] 156 bytes {application} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 905 bytes {application} [built]
+[./node_modules/webpack/buildin/harmony-module.js] (webpack)/buildin/harmony-module.js 631 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 98 hidden modules
+
+ERROR in ./app/javascript/components/board/Board.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/will/Trello-Clone/app/javascript/components/board/Board.jsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (17:4)
+
+  15 |         <i class="sub-icon sm-icon"></i>Subscribed</div>
+  16 |     </header>
+> 17 |     <main>
+     |     ^
+  18 |         <div id="list-container" class="list-container">
+  19 |             <div id="existing-lists" class="existing-lists">
+  20 |                 <div class="list-wrapper">
+    at Object._raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:766:17)
+    at Object.raiseWithData (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:759:17)
+    at Object.raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:753:17)
+    at Object.jsxParseElementAt (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4696:18)
+    at Object.jsxParseElement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4706:17)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4713:19)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseMaybeAssignAllowIn (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:17)
+    at Object.parseParenAndDistinguishExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10473:28)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10177:21)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4718:20)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at Object.parseExpressionBase (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9564:23)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:17)
+    at Object.parseReturnStatement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11800:28)
+    at Object.parseStatementContent (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11479:21)
+ @ ./app/javascript/components/Application.jsx 8:0-34 35:15-20
+ @ ./app/javascript/packs/application.js
+
+Completed 200 OK in 3063ms (Views: 3062.4ms | ActiveRecord: 0.0ms | Allocations: 10151)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:29:14 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+Hash: 688131c2e7c98fd54ec0
+Version: webpack 4.44.2
+Time: 1984ms
+Built at: 10/06/2020 1:29:17 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-2095a5a37030014f83d6.js    1.8 MiB  application  [emitted] [immutable]  application
+js/application-2095a5a37030014f83d6.js.map   1.97 MiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-2095a5a37030014f83d6.js js/application-2095a5a37030014f83d6.js.map
+[./app/javascript/actions/BoardActions.js] 1020 bytes {application} [built]
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/constants/ActionTypes.js] 231 bytes {application} [built]
+[./app/javascript/constants/ApiRoutes.js] 89 bytes {application} [built]
+[./app/javascript/lib/ApiClient.js] 909 bytes {application} [built]
+[./app/javascript/lib/Store.js] 221 bytes {application} [built]
+[./app/javascript/packs/application.js] 1.86 KiB {application} [built]
+[./app/javascript/reducers/boards.js] 417 bytes {application} [built]
+[./app/javascript/reducers/rootReducer.js] 156 bytes {application} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 905 bytes {application} [built]
+[./node_modules/webpack/buildin/harmony-module.js] (webpack)/buildin/harmony-module.js 631 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 98 hidden modules
+
+ERROR in ./app/javascript/components/board/Board.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/will/Trello-Clone/app/javascript/components/board/Board.jsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (17:4)
+
+  15 |         <i class="sub-icon sm-icon"></i>Subscribed</div>
+  16 |     </header>
+> 17 |     <main>
+     |     ^
+  18 |         <div id="list-container" class="list-container">
+  19 |             <div id="existing-lists" class="existing-lists">
+  20 |                 <div class="list-wrapper">
+    at Object._raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:766:17)
+    at Object.raiseWithData (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:759:17)
+    at Object.raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:753:17)
+    at Object.jsxParseElementAt (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4696:18)
+    at Object.jsxParseElement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4706:17)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4713:19)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseMaybeAssignAllowIn (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:17)
+    at Object.parseParenAndDistinguishExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10473:28)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10177:21)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4718:20)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at Object.parseExpressionBase (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9564:23)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:17)
+    at Object.parseReturnStatement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11800:28)
+    at Object.parseStatementContent (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11479:21)
+ @ ./app/javascript/components/Application.jsx 8:0-34 35:15-20
+ @ ./app/javascript/packs/application.js
+
+Completed 200 OK in 3080ms (Views: 3079.4ms | ActiveRecord: 0.0ms | Allocations: 10153)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:29:41 -0400
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1342ms (Views: 1338.5ms | ActiveRecord: 0.0ms | Allocations: 1900085)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:30:42 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 5)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3029ms (Views: 3028.1ms | ActiveRecord: 0.0ms | Allocations: 10259)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:31:19 -0400
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1353ms (Views: 1349.7ms | ActiveRecord: 0.0ms | Allocations: 1900091)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:31:49 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 5)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 2948ms (Views: 2947.0ms | ActiveRecord: 0.0ms | Allocations: 10258)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:31:53 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (2.9ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 21.1ms | Allocations: 3850)
+Completed 200 OK in 27ms (Views: 15.0ms | ActiveRecord: 8.5ms | Allocations: 6610)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:32:01 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 5)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3046ms (Views: 3045.0ms | ActiveRecord: 0.0ms | Allocations: 10231)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:32:05 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 1.6ms | Allocations: 859)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.3ms | Allocations: 1300)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:32:10 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 5)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 2965ms (Views: 2964.4ms | ActiveRecord: 0.0ms | Allocations: 10229)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:32:23 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3078ms (Views: 3077.2ms | ActiveRecord: 0.0ms | Allocations: 10229)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:32:26 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 2.0ms | Allocations: 867)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.5ms | Allocations: 1311)
+
+
+Started GET "/ui" for ::1 at 2020-10-06 13:32:55 -0400
+Processing by UiController#index as HTML
+  Rendering ui/index.html.erb within layouts/static
+  Rendered ui/index.html.erb within layouts/static (Duration: 0.8ms | Allocations: 782)
+Completed 200 OK in 25ms (Views: 23.3ms | ActiveRecord: 0.0ms | Allocations: 13457)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:34:10 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+Started GET "/api/boards" for ::1 at 2020-10-06 13:34:10 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 3.5ms | Allocations: 919)
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.7ms | Allocations: 1368)
+
+
+[Webpacker] Compilation failed:
+Hash: 1f3be5eae028c9a4671a
+Version: webpack 4.44.2
+Time: 1998ms
+Built at: 10/06/2020 1:34:13 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-8d55502dfb627a5955ff.js    1.8 MiB  application  [emitted] [immutable]  application
+js/application-8d55502dfb627a5955ff.js.map   1.97 MiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-8d55502dfb627a5955ff.js js/application-8d55502dfb627a5955ff.js.map
+[./app/javascript/actions/BoardActions.js] 1020 bytes {application} [built]
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/constants/ActionTypes.js] 231 bytes {application} [built]
+[./app/javascript/constants/ApiRoutes.js] 89 bytes {application} [built]
+[./app/javascript/lib/ApiClient.js] 909 bytes {application} [built]
+[./app/javascript/lib/Store.js] 221 bytes {application} [built]
+[./app/javascript/packs/application.js] 1.86 KiB {application} [built]
+[./app/javascript/reducers/boards.js] 417 bytes {application} [built]
+[./app/javascript/reducers/rootReducer.js] 156 bytes {application} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 905 bytes {application} [built]
+[./node_modules/webpack/buildin/harmony-module.js] (webpack)/buildin/harmony-module.js 631 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 98 hidden modules
+
+ERROR in ./app/javascript/components/board/Board.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/will/Trello-Clone/app/javascript/components/board/Board.jsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (17:4)
+
+  15 |         <i class="sub-icon sm-icon"></i>Subscribed</div>
+  16 |     </header>
+> 17 |     <main>
+     |     ^
+  18 |         <div id="list-container" class="list-container">
+  19 |             <div id="existing-lists" class="existing-lists">
+  20 |                 <div class="list-wrapper">
+    at Object._raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:766:17)
+    at Object.raiseWithData (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:759:17)
+    at Object.raise (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:753:17)
+    at Object.jsxParseElementAt (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4696:18)
+    at Object.jsxParseElement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4706:17)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4713:19)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseMaybeAssignAllowIn (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9586:17)
+    at Object.parseParenAndDistinguishExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10473:28)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:10177:21)
+    at Object.parseExprAtom (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:4718:20)
+    at Object.parseExprSubscripts (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9844:23)
+    at Object.parseUpdate (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9824:21)
+    at Object.parseMaybeUnary (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9813:17)
+    at Object.parseExprOps (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9683:23)
+    at Object.parseMaybeConditional (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9657:23)
+    at Object.parseMaybeAssign (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9620:21)
+    at Object.parseExpressionBase (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9564:23)
+    at /home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:39
+    at Object.allowInAnd (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11303:12)
+    at Object.parseExpression (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:9558:17)
+    at Object.parseReturnStatement (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11800:28)
+    at Object.parseStatementContent (/home/will/Trello-Clone/node_modules/@babel/parser/lib/index.js:11479:21)
+ @ ./app/javascript/components/Application.jsx 8:0-34 35:15-20
+ @ ./app/javascript/packs/application.js
+
+Completed 200 OK in 3124ms (Views: 3123.8ms | ActiveRecord: 0.0ms | Allocations: 15013)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:34:13 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.0ms | Allocations: 8827)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:35:10 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3614ms (Views: 3613.7ms | ActiveRecord: 0.0ms | Allocations: 10227)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:35:14 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 1.8ms | Allocations: 859)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 1302)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:35:27 -0400
+Started GET "/api/boards" for ::1 at 2020-10-06 13:35:27 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 2.5ms | Allocations: 942)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.7ms | Allocations: 3098)
+
+
+[Webpacker] Compiling...
+Started GET "/" for ::1 at 2020-10-06 13:35:28 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 4024ms (Views: 4023.1ms | ActiveRecord: 0.0ms | Allocations: 21958)
+
+
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3463ms (Views: 3462.2ms | ActiveRecord: 0.0ms | Allocations: 12362)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 13:35:32 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 2.0ms | Allocations: 859)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 1300)
+
+
+Started GET "/ui" for ::1 at 2020-10-06 13:36:04 -0400
+Processing by UiController#index as HTML
+  Rendering ui/index.html.erb within layouts/static
+  Rendered ui/index.html.erb within layouts/static (Duration: 0.4ms | Allocations: 552)
+Completed 200 OK in 9ms (Views: 8.8ms | ActiveRecord: 0.0ms | Allocations: 12035)
+
+
+Started GET "/ui/single_board" for ::1 at 2020-10-06 13:36:07 -0400
+Processing by UiController#single_board as HTML
+  Rendering ui/single_board.html.erb within layouts/static
+  Rendered ui/single_board.html.erb within layouts/static (Duration: 0.5ms | Allocations: 334)
+Completed 200 OK in 12ms (Views: 11.1ms | ActiveRecord: 0.0ms | Allocations: 11932)
+
+
+Started GET "/images/admin-badge.png" for ::1 at 2020-10-06 13:36:07 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/admin-badge.png"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-10-06 13:49:44 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+[Webpacker] Compiling...
+Started GET "/api/boards" for ::1 at 2020-10-06 13:49:44 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 6.6ms | Allocations: 931)
+Completed 200 OK in 15ms (Views: 13.0ms | ActiveRecord: 0.8ms | Allocations: 1384)
+
+
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3223ms (Views: 3222.2ms | ActiveRecord: 0.0ms | Allocations: 15099)
+
+
+Started GET "/boards/1" for ::1 at 2020-10-06 13:49:47 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/boards/1"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/api/boards" for ::1 at 2020-10-06 13:55:04 -0400
+Processing by Api::BoardsController#index as */*
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.6ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 3.3ms | Allocations: 916)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.6ms | Allocations: 1421)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:58:02 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+Started GET "/api/boards" for ::1 at 2020-10-06 13:58:02 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (7.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+[Webpacker] Compiling...
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 19.7ms | Allocations: 3061)
+Completed 200 OK in 21ms (Views: 13.2ms | ActiveRecord: 7.3ms | Allocations: 3516)
+
+
+Started GET "/" for ::1 at 2020-10-06 13:58:05 -0400
+Started GET "/api/boards" for ::1 at 2020-10-06 13:58:05 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.6ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 2.6ms | Allocations: 859)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.6ms | Allocations: 1306)
+
+
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3401ms (Views: 3399.8ms | ActiveRecord: 0.0ms | Allocations: 27476)
+
+
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3184ms (Views: 3182.8ms | ActiveRecord: 0.0ms | Allocations: 12446)
+
+
+Started GET "/boards/2" for ::1 at 2020-10-06 13:58:08 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/boards/2"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (5.0.2) lib/puma/configuration.rb:238:in `call'
+puma (5.0.2) lib/puma/server.rb:638:in `block in handle_request'
+puma (5.0.2) lib/puma/thread_pool.rb:337:in `with_force_shutdown'
+puma (5.0.2) lib/puma/server.rb:637:in `handle_request'
+puma (5.0.2) lib/puma/server.rb:394:in `process_client'
+puma (5.0.2) lib/puma/server.rb:250:in `block in run'
+puma (5.0.2) lib/puma/thread_pool.rb:145:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-10-06 14:14:33 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+Started GET "/api/boards" for ::1 at 2020-10-06 14:14:33 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 3.4ms | Allocations: 1020)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.7ms | Allocations: 1460)
+
+
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/will/Trello-Clone/public/packs
+Completed 200 OK in 3223ms (Views: 3222.2ms | ActiveRecord: 0.0ms | Allocations: 15038)
+
+
+Started GET "/" for ::1 at 2020-10-06 14:14:37 -0400
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 74ms (Views: 72.2ms | ActiveRecord: 0.0ms | Allocations: 8859)
+
+
+Started GET "/api/boards" for ::1 at 2020-10-06 14:14:37 -0400
+Processing by Api::BoardsController#index as JSON
+  Rendering api/boards/index.json.jbuilder
+  [1m[36mBoard Load (0.6ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 3.3ms | Allocations: 917)
+Completed 200 OK in 5ms (Views: 3.7ms | ActiveRecord: 0.6ms | Allocations: 1357)
+
+
+Started GET "/" for ::1 at 2020-10-06 14:24:34 -0400
+Started GET "/api/boards" for ::1 at 2020-10-06 14:24:34 -0400
+Processing by Api::BoardsController#index as JSON
+Processing by HomeController#index as HTML
+  Rendering api/boards/index.json.jbuilder
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+  [1m[36mBoard Load (3.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards"[0m
+  ↳ app/views/api/boards/index.json.jbuilder:1
+  Rendered api/boards/index.json.jbuilder (Duration: 5.2ms | Allocations: 3908)
+Completed 200 OK in 9ms (Views: 4.1ms | ActiveRecord: 3.8ms | Allocations: 5387)
+
+
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 18ms (Views: 17.6ms | ActiveRecord: 0.0ms | Allocations: 10244)
+
+
+Started GET "/ui/single_board" for ::1 at 2020-10-06 14:24:57 -0400
+Processing by UiController#single_board as HTML
+  Rendering ui/single_board.html.erb within layouts/static
+  Rendered ui/single_board.html.erb within layouts/static (Duration: 0.0ms | Allocations: 4)
+Completed 200 OK in 19ms (Views: 18.1ms | ActiveRecord: 0.0ms | Allocations: 11489)
+
+
