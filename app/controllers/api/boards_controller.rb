@@ -4,6 +4,11 @@ class Api::BoardsController < ApplicationController
     render :index
   end
 
+  def show
+    @board = Board.find_by_id(params[:id])
+    render :json => { :error => 'not found' }, :status => 404 if @board.nil?
+  end
+
   def create
     @board = Board.new(board_params)
 
