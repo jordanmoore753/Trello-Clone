@@ -1,35 +1,21 @@
 import React from "react";
-import lists from "../../reducers/lists";
+import BoardHeader from "./BoardHeader";
+import List from "../list/List"
 
-const Board = props => {
-console.log(props);
-return (
-  <div>
-      <p>
-          {props.title}
-      </p>
-      <div>
-          {props.lists.map(list => {
-              return (
-                <div>
-                <p>
-                    {list.title}
-                </p>
-                    {props.cards.filter(card => {
-                      return list.id === card.list_id;
-                    }).map(card => {
-                        return (
-                            <p>
-                                {card.title}
-                            </p>
-                        );
-                    })
-                    }
-                </div>
-              );
-          })}
-      </div>
-  </div>
-)};
+const Board = ({ title, lists, cards }) => {
+  return (
+    <div>
+        <BoardHeader title={title} />
+        {lists.map(list => {
+          let ownCards = cards.filter(card => {
+            return card.list_id === list.id;
+          });
+          return (
+            <List list={list} cards={ownCards} key={list.id} />
+          );
+        })}
+    </div>
+  );
+};
 
 export default Board;
