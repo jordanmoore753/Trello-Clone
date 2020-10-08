@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import Board from "./Board";
 
 const mapStateToProps = (state, ownProps) => {
-  const thisBoard = state.boards
-    .find(board => board.id == ownProps.match.params.id);
-  const title = thisBoard ? thisBoard.title : "";
+  const id = Number(ownProps.match.params.id)
+  const board = state.boards
+    .find(board => board.id === id);
   return {
-    id: ownProps.match.params.id,
-    title,
+    id,
+    board,
     lists: state.lists,
     cards: state.cards,
   };
@@ -29,13 +29,20 @@ class BoardContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      <Board
-        title={ this.props.title }
-        lists={ this.props.lists }
-        id={ this.props.id }
-        cards={ this.props.cards }
-      />
+      <div>
+        {
+          this.props.board ? (
+            <Board
+              title={ this.props.board.title }
+              lists={ this.props.lists }
+              id={ this.props.id }
+              cards={ this.props.cards }
+            />
+          ) : null
+        }
+      </div>
     );
   }
 }

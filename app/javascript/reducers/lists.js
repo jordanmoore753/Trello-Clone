@@ -9,6 +9,28 @@ export default function lists(state = [], action) {
       });
       newLists = [...newLists, ...newListsWithoutCards];
       return newLists;
+    case "CREATE_LIST_SUCCESS":
+      {
+        const { board_id, title } = action.payload;
+        let list = {
+          board_id,
+          title
+        };
+
+        return [ ...state, list ];
+      }
+    case "EDIT_LIST_TITLE":
+      {
+        const { list_id, title } = action.payload;
+        return state.map((list) => {
+          if (list.id === list_id) {
+            return Object.assign({}, list, {
+              title
+            })
+          }
+          return list;
+        })
+      }
     default:
       return state;
   }

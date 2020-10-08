@@ -1,6 +1,26 @@
 import apiClient from "../lib/ApiClient";
 import * as types from "../constants/ActionTypes";
 
+export function addList(board_id, title) {
+  return { 
+    type: types.ADD_LIST,
+    payload: {
+      board_id,
+      title
+    }
+  }
+}
+
+export function editListTitle(list_id, title) {
+  return {
+    type: types.EDIT_LIST_TITLE,
+    payload: {
+      list_id,
+      title
+    }
+  }
+}
+
 export function fetchBoardsRequest() {
   return { type: types.FETCH_BOARDS_REQUEST };
 }
@@ -19,6 +39,18 @@ export function createBoardRequest() {
 
 export function createBoardSuccess(board) {
   return { type: types.CREATE_BOARD_SUCCESS, board: board };
+}
+
+export function createListSuccess(list) {
+  const { board_id, title } = list;
+  console.log(list);
+  return {
+    type: types.ADD_LIST,
+    payload: {
+      board_id,
+      title
+    }
+  }
 }
 
 export function fetchBoards() {
@@ -45,4 +77,16 @@ export function createBoard(board, callback) {
       }
     });
   };
+}
+
+export function createList(board_id, title, callback) {
+  return function(dispatch) {
+    apiClient.createList(board_id, title, newList => {
+      dispatch(createListSuccess(newList));
+
+      if (callback) {
+        callback(newList);
+      }
+    })
+  }
 }
