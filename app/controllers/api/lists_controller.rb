@@ -17,13 +17,11 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find_by_id(params[:id])
 
-    render :json => { :error => 'not found' }, :status => 404 if @list.nil?
+    return render :json => { :error => 'not found' }, :status => 404 if @list.nil?
 
     if !@list.update(title: params[:title])
-      return render :json => { :error => 'not found' }, :status => 422
+      return render 'api/shared/error', status: :unprocessable_entity
     end
-
-    
   end
 
   def list_params
