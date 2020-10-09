@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Board from "./Board";
 
 const mapStateToProps = (state, ownProps) => {
-  const id = Number(ownProps.match.params.id)
+  const id = Number(ownProps.match.params.id);
   const board = state.boards
     .find(board => board.id === id);
   return {

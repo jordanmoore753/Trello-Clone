@@ -43,6 +43,15 @@ export function createListSuccess(list) {
   }
 }
 
+export function createCardSuccess(card) {
+  return {
+    type: types.CREATE_CARD_SUCCESS,
+    payload: {
+      card
+    }
+  }
+}
+
 export function fetchBoards() {
   return function(dispatch) {
     dispatch(fetchBoardsRequest());
@@ -88,6 +97,18 @@ export function updateList(list_id, title, callback) {
 
       if (callback) {
         callback(newList);
+      }
+    })
+  }
+}
+
+export function createCard(list_id, title, callback) {
+  return function(dispatch) {
+    apiClient.createCard(list_id, title, newCard => {
+      dispatch(createCardSuccess(newCard));
+
+      if (callback) {
+        callback(newCard);
       }
     })
   }

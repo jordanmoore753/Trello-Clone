@@ -60,6 +60,18 @@ const apiClient = {
       .then(unwrapData)
       .then(callback)
       .catch(logError)
+  },
+  createCard: function(list_id, title, callback) {
+    return axios
+      .post(routes.CREATE_CARD_URL, {
+        list_id,
+        card: {
+          title
+        }
+      })
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError)
   }
 };
 

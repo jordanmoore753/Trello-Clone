@@ -1,10 +1,13 @@
 import React from "react";
 import CardTile from "../card/CardTile";
+import { Link } from 'react-router-dom';
 
 class List extends React.Component  {
   state = {
     active: false,
-    fieldValue: this.props.list.title
+    fieldValue: this.props.list.title,
+    addCardActive: false,
+    cardValue: ''
   }
 
   handleTitleClick = () => {
@@ -17,8 +20,7 @@ class List extends React.Component  {
     const value = event.target.value;
     this.setState({
       fieldValue: value
-    })
-    console.log(this.props.list.title);
+    });
   }
 
   handleEnterPress = (event) => {
@@ -43,9 +45,41 @@ class List extends React.Component  {
     });
   }
 
+  handleOpenCardForm = (event) => {
+    // event.stopPropagation();
+    this.setState({
+      addCardActive: true
+    });
+  }
+
+  handleCloseCardForm = (event) => {
+    this.closeCardForm();
+  }
+
+  closeCardForm = () => {
+    this.setState({
+      cardValue: '',
+      addCardActive: false
+    });
+  }
+
+  handleCardInputChange = (event) => {
+    const value = event.target.value;
+    this.setState({ cardValue: value });
+  }
+
+  handleAddCard = (event) => {
+    event.preventDefault();
+
+    if (this.state.cardValue === '') return;
+    
+    this.props.onCardAdd(this.state.cardValue, this.closeCardForm);
+  }
+
+// `/boards/${board_id}/cards/${card.id}`
   render () {
     return (
-      <div className="list-wrapper">
+      <div className={`list-wrapper ${this.state.addCardActive && 'add-dropdown-active'}`}>
         <div className="list-background">
           <div className="list">
               <a className="more-icon sm-icon" href=""></a>
@@ -79,18 +113,43 @@ class List extends React.Component  {
               <div id="cards-container" data-id="list-1-cards">
                 {this.props.cards.map(card => {
                     return (
-                      <CardTile card={card} key={card.id} />
+                      <Link to={({ pathname }) => { return pathname + 'cards/' + card.id; }}>
+                        <CardTile card={card} key={card.id} />
+                      </Link>
                     );
                   })
                 }
               </div>
-              <div className="add-dropdown add-bottom">
-                  <div className="card"><div className="card-info"></div><textarea name="add-card"></textarea><div className="members"></div></div>
-                  <a className="button">Add</a><i className="x-icon icon"></i>
+              <div className={`add-dropdown add-bottom ${this.state.addCardActive && "active-card"}`}>
+                  <div className="card">
+                    <div className="card-info"></div>
+                    <textarea 
+                      name="add-card" 
+                      value={this.state.cardValue}
+                      onChange={this.handleCardInputChange}
+                    ></textarea>
+                    <div className="members"></div>
+                  </div>
+                  <a 
+                    className="button"
+                    onClick={this.handleAddCard}
+                  >
+                    Add
+                  </a>
+                  <i 
+                    className="x-icon icon"
+                    onClick={this.handleCloseCardForm}
+                  ></i>
                   <div className="add-options"><span>...</span>
                   </div>
               </div>
-              <div className="add-card-toggle" data-position="bottom">Add a card...</div>
+              <div 
+                className="add-card-toggle" 
+                data-position="bottom"
+                onClick={this.handleOpenCardForm}
+              >
+              Add a card...
+              </div>
           </div>
         </div>
       </div>

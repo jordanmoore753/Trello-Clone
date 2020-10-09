@@ -7,13 +7,16 @@ export default function cards(state = [], action) {
       const oldValidCards = state.filter(card => {
         return listIds.includes(card.list_id);
       });
+
       const newCards =  action.payload.board.lists.map(list => {
         const { cards } = list;
         return cards;
       });
-      console.log(oldValidCards);
-      console.log(newCards);
+
       return [...oldValidCards, ...newCards].flat();
+    case "CREATE_CARD_SUCCESS":
+      const card = action.payload.card;
+      return state.concat(card);
     default:
       return state;
   }

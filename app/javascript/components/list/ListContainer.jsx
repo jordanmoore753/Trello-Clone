@@ -7,6 +7,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onTitleUpdate: (title) => {
       dispatch(actions.updateList(list_id, title));
+    },
+
+    onCardAdd: (title, callback) => {
+    	dispatch(actions.createCard(list_id, title, callback));
     }
   }
 }
