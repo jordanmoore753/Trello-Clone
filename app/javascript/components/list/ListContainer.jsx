@@ -6,7 +6,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const list_id = ownProps.id;
   return {
     onTitleUpdate: (title) => {
-      dispatch(actions.editListTitle(list_id, title));
+      dispatch(actions.updateList(list_id, title));
     }
   }
 }

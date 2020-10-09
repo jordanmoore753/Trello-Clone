@@ -15,9 +15,21 @@ class Api::ListsController < ApplicationController
   end
 
   def update
+    @list = List.find_by_id(params[:id])
+
+    render :json => { :error => 'not found' }, :status => 404 if @list.nil?
+
+    if !@list.update(title: params[:title])
+      return render :json => { :error => 'not found' }, :status => 422
+    end
+
+    
   end
 
   def list_params
-    params.require(:list).permit(:title, :board_id)
+    { board_id: params[:board_id], title: params[:list][:title] }
+
+    # params.permit(:board_id)
+    # params.require(:list).permit(:title)
   end
 end

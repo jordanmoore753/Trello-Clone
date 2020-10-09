@@ -21,9 +21,10 @@ export default function lists(state = [], action) {
       }
     case "EDIT_LIST_TITLE":
       {
-        const { list_id, title } = action.payload;
+        console.log(action.payload);
+        const { id, title } = action.payload;
         return state.map((list) => {
-          if (list.id === list_id) {
+          if (list.id === id) {
             return Object.assign({}, list, {
               title
             })

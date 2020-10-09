@@ -1,21 +1,11 @@
 import apiClient from "../lib/ApiClient";
 import * as types from "../constants/ActionTypes";
 
-export function addList(board_id, title) {
-  return { 
-    type: types.ADD_LIST,
-    payload: {
-      board_id,
-      title
-    }
-  }
-}
-
-export function editListTitle(list_id, title) {
+export function updateListSuccess({ id, title }) {
   return {
     type: types.EDIT_LIST_TITLE,
     payload: {
-      list_id,
+      id,
       title
     }
   }
@@ -43,7 +33,7 @@ export function createBoardSuccess(board) {
 
 export function createListSuccess(list) {
   const { board_id, title } = list;
-  console.log(list);
+
   return {
     type: types.ADD_LIST,
     payload: {
@@ -83,6 +73,18 @@ export function createList(board_id, title, callback) {
   return function(dispatch) {
     apiClient.createList(board_id, title, newList => {
       dispatch(createListSuccess(newList));
+
+      if (callback) {
+        callback(newList);
+      }
+    })
+  }
+}
+
+export function updateList(list_id, title, callback) {
+  return function(dispatch) {
+    apiClient.updateList(list_id, title, newList => {
+      dispatch(updateListSuccess(newList));
 
       if (callback) {
         callback(newList);
