@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 
   const board = state.boards.find(board => board.id === id);
+
   return {
     id,
     board,

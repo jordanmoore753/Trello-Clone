@@ -10,7 +10,10 @@ export default function cards(state = [], action) {
 
       const newCards =  action.payload.board.lists.map(list => {
         const { cards } = list;
-        return cards;
+        return cards.map(card => {
+          const { board_id, ...cardWithoutBoardId } = card;
+          return cardWithoutBoardId;
+        });
       });
 
       return [...oldValidCards, ...newCards].flat();
@@ -20,7 +23,6 @@ export default function cards(state = [], action) {
     case "FETCH_CARD_SUCCESS":
       let cards = state.filter(card => card.id !== action.payload.id);
       let { board_id, ...cardWithoutBoardId } = action.payload;
-      console.log(action.payload);
       return cards.concat(cardWithoutBoardId);
     default:
       return state;

@@ -6,10 +6,17 @@ import BoardContainer from '../board/BoardContainer';
 import * as actions from '../../actions/BoardActions';
 
 const mapStateToProps = (state, ownProps) => {
+	console.log(state.cards);
+
 	const card = state.cards.find(card => card.id === Number(ownProps.match.params.card_id));
+
+	if (card) {
+		var list = state.lists.find(list => list.id === card.list_id);
+	}
 
 	return {
 		card,
+		list,
 		cardId: ownProps.match.params.card_id,
 		boardId: state.currentBoardId,
 	};
@@ -34,6 +41,7 @@ class CardContainer extends React.Component {
 				{ this.props.card
 					? <Card 
 							card={this.props.card}
+							list={this.props.list}
 							boardId={this.props.boardId}
 						/>
 					: <p>Loading...</p>
