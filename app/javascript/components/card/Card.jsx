@@ -2,12 +2,12 @@ import React from "react";
 
 class Card extends React.Component {
 	state = {
-
 	};
 
 	render() {
 		return (
-		<div id="modal-container">
+		<>
+			<div id="modal-container">
 		  <div className="screen"></div>
 		  <div id="modal">
 		    <i className="x-icon icon close-modal"></i>
@@ -185,6 +185,7 @@ class Card extends React.Component {
 		    </aside>
 		  </div>
 		</div>
+		</>
 		);
 	}
 }

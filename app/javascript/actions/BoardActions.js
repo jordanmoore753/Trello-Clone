@@ -113,3 +113,13 @@ export function createCard(list_id, title, callback) {
     })
   }
 }
+
+export function fetchCardSuccess(card) {
+  return { type: types.FETCH_CARD_SUCCESS, payload: { ...card } };
+}
+
+export function fetchCard(id) {
+  return function(dispatch) {
+    apiClient.fetchCard(id, card => dispatch(fetchCardSuccess(card)));
+  }
+}

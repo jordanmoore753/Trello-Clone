@@ -76,7 +76,6 @@ class List extends React.Component  {
     this.props.onCardAdd(this.state.cardValue, this.closeCardForm);
   }
 
-// `/boards/${board_id}/cards/${card.id}`
   render () {
     return (
       <div className={`list-wrapper ${this.state.addCardActive && 'add-dropdown-active'}`}>
@@ -111,9 +110,9 @@ class List extends React.Component  {
                   </div>
               </div>
               <div id="cards-container" data-id="list-1-cards">
-                {this.props.cards.map(card => {
+                {this.props.cards.sort((a, b) => a.id - b.id).map(card => {
                     return (
-                      <Link to={({ pathname }) => { return pathname + 'cards/' + card.id; }}>
+                      <Link to={`/cards/${card.id}`}>
                         <CardTile card={card} key={card.id} />
                       </Link>
                     );

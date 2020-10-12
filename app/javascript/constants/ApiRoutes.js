@@ -5,3 +5,6 @@ export const CREATE_CARD_URL = '/api/cards';
 export const UPDATE_LIST_URL = (list_id) => {
 	return `/api/lists/${list_id}`;
 };
+export const GET_CARD_URL = (card_id) => {
+	return `/api/cards/${card_id}`;
+};
