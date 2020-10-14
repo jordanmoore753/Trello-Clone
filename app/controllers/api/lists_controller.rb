@@ -6,12 +6,12 @@ class Api::ListsController < ApplicationController
       render :create
     else
       @error = @list.errors.full_messages.join(', ')
-      render 'api/shared/error', status: :unprocessable_entity
+      render 'shared/error', status: :unprocessable_entity
     end
 
     rescue ActionController::ParameterMissing
       @error = "Invalid list data provided"
-      render 'api/shared/error', status: :unprocessable_entity
+      render 'shared/error', status: :unprocessable_entity
   end
 
   def update
@@ -20,7 +20,7 @@ class Api::ListsController < ApplicationController
     return render :json => { :error => 'not found' }, :status => 404 if @list.nil?
 
     if !@list.update(title: params[:title])
-      return render 'api/shared/error', status: :unprocessable_entity
+      return render 'shared/error', status: :unprocessable_entity
     end
   end
 

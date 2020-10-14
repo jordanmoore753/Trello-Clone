@@ -16,11 +16,11 @@ class Api::BoardsController < ApplicationController
       render :create, status: :created
     else
       @error = @board.errors.full_messages.join(', ')
-      render 'api/shared/error', status: :unprocessable_entity
+      render 'shared/error', status: :unprocessable_entity
     end
   rescue ActionController::ParameterMissing
     @error = "Invalid board data provided"
-    render 'api/shared/error', status: :unprocessable_entity
+    render 'shared/error', status: :unprocessable_entity
   end
 
   private

@@ -8,3 +8,6 @@ export const UPDATE_LIST_URL = (list_id) => {
 export const GET_CARD_URL = (card_id) => {
 	return `/api/cards/${card_id}`;
 };
+export const UPDATE_CARD_URL = (card_id) => {
+  return `/api/cards/${card_id}`
+}

@@ -114,6 +114,13 @@ export function createCard(list_id, title, callback) {
   }
 }
 
+export function updateCard(card_id, title, callback) {
+  /* do this firt */
+  return function(dispatch) {
+    apiClient.
+  }
+}
+
 export function fetchCardSuccess(card) {
   return { type: types.FETCH_CARD_SUCCESS, payload: { ...card } };
 }

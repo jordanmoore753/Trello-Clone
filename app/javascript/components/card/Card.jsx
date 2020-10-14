@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import DescriptionForm from "./DescriptionForm.jsx";
 import DetailsSection from "./DetailsSection.js";
 import CommentSection from "./CommentSection.jsx";
-import ActivityContainer from "./ActivitySection.jsx";
+import ActivityListContainer from "./ActivityListContainer.jsx";
 import AddSidebar from "./Add.jsx";
 import ActionsSidebar from "./Actions.jsx";
 import Header from "./Header.jsx";
@@ -31,7 +31,7 @@ class Card extends React.Component {
                   <CommentSection />
                 </li>
                 <li className="activity-section">
-                  <ActivityContainer card={this.props.card} />
+                  <ActivityListContainer cardId={this.props.card.id} />
                 </li>
               </ul>
             </section>
