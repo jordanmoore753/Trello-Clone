@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
     id,
     board,
     lists: state.lists.slice(),
-    cards: state.cards.slice(),
+    cards: state.cards.slice().filter(card => !card.archived),
   };
 };
 
