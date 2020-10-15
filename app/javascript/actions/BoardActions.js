@@ -115,8 +115,12 @@ export function createCard(list_id, title, callback) {
 }
 
 export function updateCardTitle(card_id, title, callback) {
+  return updateCard(card_id, { title }, callback);
+}
+
+export function updateCard(card_id, newAttrs, callback) {
   return function(dispatch) {
-    apiClient.updateCard(card_id, title, newCard => {
+    apiClient.updateCard(card_id, newAttrs, newCard => {
       dispatch(fetchCardSuccess(newCard));
 
       if (callback) {
@@ -124,6 +128,10 @@ export function updateCardTitle(card_id, title, callback) {
       }
     });
   }
+}
+
+export function updateCardDescription(card_id, description, callback) {
+  return updateCard(card_id, { description }, callback);
 }
 
 export function fetchCardSuccess(card) {

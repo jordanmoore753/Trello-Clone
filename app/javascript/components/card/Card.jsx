@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DescriptionForm from "./DescriptionForm.jsx";
+import DescriptionFormContainer from "./DescriptionFormContainer.jsx";
 import DetailsSection from "./DetailsSection.js";
 import CommentSection from "./CommentSection.jsx";
 import ActivityListContainer from "./ActivityListContainer.jsx";
@@ -25,7 +25,7 @@ class Card extends React.Component {
               <ul className="modal-outer-list">
                 <li className="details-section">
                   <DetailsSection card={this.props.card} />
-                  <DescriptionForm card={this.props.card} />
+                  <DescriptionFormContainer card={this.props.card} />
                 </li>
                 <li className="comment-section">
                   <CommentSection />
