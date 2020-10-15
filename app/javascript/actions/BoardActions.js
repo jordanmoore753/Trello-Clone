@@ -114,10 +114,15 @@ export function createCard(list_id, title, callback) {
   }
 }
 
-export function updateCard(card_id, title, callback) {
-  /* do this firt */
+export function updateCardTitle(card_id, title, callback) {
   return function(dispatch) {
-    apiClient.
+    apiClient.updateCard(card_id, title, newCard => {
+      dispatch(fetchCardSuccess(newCard));
+
+      if (callback) {
+        callback(newCard);
+      }
+    });
   }
 }
 

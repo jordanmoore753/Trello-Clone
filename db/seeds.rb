@@ -21,6 +21,12 @@ card3 = Card.create(title: "Third Card", description: "One more card", list: lis
 card4 = Card.create(title: "Fourth Card", description: "Yet another card", list: list2)
 card5 = Card.create(title: "Fifth Card", description: "Last card", list: list2)
 
+comment1 = Comment.create(text: "First comment", card: card1)
+comment2 = Comment.create(text: "Second comment", card: card1)
+
+action1 = Action.create(description: "created some action.", card: card1)
+action2 = Action.create(description: "created another action", card: card1)
+
 # Seed the database with the following data:
 #
 #     A board

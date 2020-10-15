@@ -6,7 +6,7 @@ import CommentSection from "./CommentSection.jsx";
 import ActivityListContainer from "./ActivityListContainer.jsx";
 import AddSidebar from "./Add.jsx";
 import ActionsSidebar from "./Actions.jsx";
-import Header from "./Header.jsx";
+import HeaderContainer from "./HeaderContainer.jsx";
 
 class Card extends React.Component {
   state = {};
@@ -20,7 +20,7 @@ class Card extends React.Component {
             <Link to={`/boards/${this.props.boardId}`}>
               <i className="x-icon icon close-modal"></i>
             </Link>
-            <Header list={this.props.list} card={this.props.card} />
+            <HeaderContainer list={this.props.list} card={this.props.card} />
             <section className="modal-main">
               <ul className="modal-outer-list">
                 <li className="details-section">

@@ -6,19 +6,24 @@ class Header extends React.Component {
   }
 
   handleTitleChange = (event) => {
+    if (event.key && event.key === 'Enter') return;
+
     const value = event.target.value;
-    console.log(value);
+
     this.setState({
       title: value
     })
   }
 
   handleTitleSubmit = (event) => {
-    if (event.key && event.key !== 'Enter') {
-      return
-    } else {
-      console.log('Submit');
-    }
+    if (this.state.title.length === 0) return;
+    this.props.onSubmit(this.state.title);
+  }
+
+  handleKeyDown = (event) => {
+    if (event.key && event.key !== 'Enter') return;
+
+    event.target.blur();
   }
 
   render() {
@@ -31,7 +36,7 @@ class Header extends React.Component {
           onChange={this.handleTitleChange}
           value={this.state.title}
           onBlur={this.handleTitleSubmit}
-          onKeyPress={this.handleTitleSubmit}
+          onKeyDown={this.handleKeyDown}
         >
           {this.state.title}
         </textarea>
