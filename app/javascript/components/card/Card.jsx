@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DescriptionFormContainer from "./DescriptionFormContainer.jsx";
 import DetailsSection from "./DetailsSection.js";
-import CommentSection from "./CommentSection.jsx";
+import CommentFormContainer from "./CommentFormContainer.jsx";
 import ActivityListContainer from "./ActivityListContainer.jsx";
 import AddSidebar from "./Add.jsx";
 import ActionsSidebarContainer from "./ActionsSidebarContainer.jsx";
@@ -36,7 +36,7 @@ class Card extends React.Component {
                   <DescriptionFormContainer card={this.props.card} />
                 </li>
                 <li className="comment-section">
-                  <CommentSection />
+                  <CommentFormContainer cardId={this.props.card.id} />
                 </li>
                 <li className="activity-section">
                   <ActivityListContainer cardId={this.props.card.id} />
@@ -48,6 +48,7 @@ class Card extends React.Component {
               <ActionsSidebarContainer 
                 archived={this.props.card.archived}
                 cardId={this.props.card.id}
+                boardId={this.props.boardId}
               />
               <ul className="light-list">
                 <li className="not-implemented">Share and more...</li>

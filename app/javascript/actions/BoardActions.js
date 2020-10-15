@@ -138,6 +138,27 @@ export function updateCardArchived(card_id, archived, callback) {
   return updateCard(card_id, { archived }, callback);
 }
 
+export function addCommentSuccess(comment) {
+  return {
+    type: types.CREATE_COMMENT_SUCCESS,
+    payload: {
+      comment
+    }
+  } 
+}
+
+export function addComment(card_id, comment, callback) {
+  return function(dispatch) {
+    apiClient.addComment(card_id, comment, newComment => {
+      dispatch(addCommentSuccess(newComment));
+
+      if (callback) {
+        callback(newComment);
+      }
+    });
+  }
+}
+
 export function fetchCardSuccess(card) {
   return { type: types.FETCH_CARD_SUCCESS, payload: { ...card } };
 }

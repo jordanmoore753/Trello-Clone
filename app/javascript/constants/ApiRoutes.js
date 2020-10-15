@@ -11,3 +11,5 @@ export const GET_CARD_URL = (card_id) => {
 export const UPDATE_CARD_URL = (card_id) => {
   return `/api/cards/${card_id}`
 }
+
+export const POST_COMMENT_URL = `/api/comments`;

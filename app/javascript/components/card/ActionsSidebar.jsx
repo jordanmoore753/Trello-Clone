@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const ActionsSidebar = (props) => {
   // const handleArchive = (event) => {
@@ -28,12 +29,14 @@ const ActionsSidebar = (props) => {
             >
               <i class="send-icon sm-icon"></i>Send to board
             </li>
-            <li 
-              className="red-button"
-              onClick={props.onDelete}
-            >
-              <i class="minus-icon sm-icon"></i>Delete
-            </li>
+            <Link to={`/boards/${props.boardId}`}>
+              <li 
+                className="red-button"
+              >
+                <i class="minus-icon sm-icon"></i>Delete
+              </li>
+            </Link>
+
           </>
         ) : (
           <li 

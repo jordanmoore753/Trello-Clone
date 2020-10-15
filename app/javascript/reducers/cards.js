@@ -24,6 +24,12 @@ export default function cards(state = [], action) {
       let cards = state.filter(card => card.id !== action.payload.id);
       let { board_id, ...cardWithoutBoardId } = action.payload;
       return cards.concat(cardWithoutBoardId);
+    case "CREATE_COMMENT_SUCCESS":
+      let comment = action.payload.comment;
+      // STRIP STUFF FROM COMMENT
+      // FIND CARD
+      // ADD TO CARD
+      // RETURN STATE
     default:
       return state;
   }

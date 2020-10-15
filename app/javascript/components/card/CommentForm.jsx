@@ -1,7 +1,19 @@
 import React from "react";
 
 class CommentSection extends React.Component {
-  state = {};
+  state = {
+    comment: ''
+  };
+
+  handleCommentChange = (e) => {
+    const value = e.target.value;
+    this.setState({ comment: value });
+  };
+
+  handleSubmitComment = (e) => {
+    this.props.onSubmit(this.state.comment);
+    this.setState({ comment: '' });
+  };
 
   render() {
     return (
@@ -14,10 +26,14 @@ class CommentSection extends React.Component {
           <div className="comment">
             <label>
               <textarea
-                required=""
+                value={this.state.comment}
                 rows="1"
                 placeholder="Write a comment..."
-              ></textarea>
+                onChange={this.handleCommentChange}
+                required={true}
+              >
+                {this.state.comment}
+              </textarea>
               <div>
                 <a className="light-button card-icon sm-icon"></a>
                 <a className="light-button smiley-icon sm-icon"></a>
@@ -27,7 +43,8 @@ class CommentSection extends React.Component {
               <div>
                 <input
                   type="submit"
-                  className="button not-implemented"
+                  className={`button ${this.state.comment.trim().length > 0 ? null : 'not-implemented'}`}
+                  onClick={this.handleSubmitComment}
                   value="Save"
                 ></input>
               </div>
