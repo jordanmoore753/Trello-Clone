@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
 import { Link } from 'react-router-dom';
+import MoveCardPopoverContainer from './MoveCardPopoverContainer';
 
 const ActionsSidebar = (props) => {
   // const handleArchive = (event) => {
@@ -10,9 +11,7 @@ const ActionsSidebar = (props) => {
     <>
       <h2>Actions</h2>
       <ul>
-        <li className="move-button">
-          <i className="forward-icon sm-icon"></i>Move
-        </li>
+        <MoveCardPopoverContainer cardId={props.cardId} />
         <li className="copy-button">
           <i className="card-icon sm-icon"></i>Copy
         </li>
@@ -21,31 +20,20 @@ const ActionsSidebar = (props) => {
           <i className="check-icon sm-icon"></i>
         </li>
         <hr />
-        { props.archived ? (
+        {props.archived ? (
           <>
-            <li 
-              className="unarchive-button"
-              onClick={props.onSubmit}
-            >
+            <li className="unarchive-button" onClick={props.onSubmit}>
               <i class="send-icon sm-icon"></i>Send to board
             </li>
             <Link to={`/boards/${props.boardId}`}>
-              <li 
-                className="red-button"
-              >
+              <li className="red-button">
                 <i class="minus-icon sm-icon"></i>Delete
               </li>
             </Link>
-
           </>
         ) : (
-          <li 
-            className="archive-button" 
-            onClick={props.onSubmit}
-          >
-            <i 
-              className="file-icon sm-icon "
-            ></i>Archive
+          <li className="archive-button" onClick={props.onSubmit}>
+            <i className="file-icon sm-icon "></i>Archive
           </li>
         )}
       </ul>
