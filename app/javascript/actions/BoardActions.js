@@ -126,6 +126,10 @@ export function updateCard(card_id, newAttrs, callback) {
   };
 }
 
+export function updateCardDate(card_id, due_date, callback) {
+  return updateCard(card_id, { due_date }, callback);
+}
+
 export function updateCardLabels(card_id, labels, callback) {
   return updateCard(card_id, { labels }, callback);
 }
