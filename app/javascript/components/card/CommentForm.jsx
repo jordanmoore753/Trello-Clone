@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 class CommentSection extends React.Component {
   state = {
-    comment: ''
+    comment: '',
   };
 
   handleCommentChange = (e) => {
@@ -43,7 +43,11 @@ class CommentSection extends React.Component {
               <div>
                 <input
                   type="submit"
-                  className={`button ${this.state.comment.trim().length > 0 ? null : 'not-implemented'}`}
+                  className={`button ${
+                    this.state.comment.trim().length > 0
+                      ? null
+                      : 'not-implemented'
+                  }`}
                   onClick={this.handleSubmitComment}
                   value="Save"
                 ></input>

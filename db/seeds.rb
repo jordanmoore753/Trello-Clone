@@ -14,12 +14,12 @@ board1 = Board.create({title: "First board"})
 list1 = List.create(title: "First List", board: board1)
 list2 = List.create(title: "Second List", board: board1)
 
-card1 = Card.create(title: "First Card", description: "One card", list: list1)
-card2 = Card.create(title: "Second Card", description: "Another card", list: list1)
+card1 = Card.create(title: "First Card", description: "One card", list: list1, due_date: Time.now + 1000000)
+card2 = Card.create(title: "Second Card", description: "Another card", list: list1, labels: ["green", "red", "yellow"])
 
 card3 = Card.create(title: "Third Card", description: "One more card", list: list2)
-card4 = Card.create(title: "Fourth Card", description: "Yet another card", list: list2)
-card5 = Card.create(title: "Fifth Card", description: "Last card", list: list2)
+card4 = Card.create(title: "Fourth Card", description: "Yet another card", list: list2, due_date: Time.now - 100000)
+card5 = Card.create(title: "Fifth Card", description: "Last card", list: list2, labels: ["red", "blue"])
 
 comment1 = Comment.create(text: "First comment", card: card1)
 comment2 = Comment.create(text: "Second comment", card: card1)

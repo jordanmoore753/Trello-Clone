@@ -1,14 +1,14 @@
-import apiClient from "../lib/ApiClient";
-import * as types from "../constants/ActionTypes";
+import apiClient from '../lib/ApiClient';
+import * as types from '../constants/ActionTypes';
 
 export function updateListSuccess({ id, title }) {
   return {
     type: types.EDIT_LIST_TITLE,
     payload: {
       id,
-      title
-    }
-  }
+      title,
+    },
+  };
 }
 
 export function fetchBoardsRequest() {
@@ -38,37 +38,37 @@ export function createListSuccess(list) {
     type: types.ADD_LIST,
     payload: {
       board_id,
-      title
-    }
-  }
+      title,
+    },
+  };
 }
 
 export function createCardSuccess(card) {
   return {
     type: types.CREATE_CARD_SUCCESS,
     payload: {
-      card
-    }
-  }
+      card,
+    },
+  };
 }
 
 export function fetchBoards() {
   return function(dispatch) {
     dispatch(fetchBoardsRequest());
-    apiClient.getBoards(boards => dispatch(fetchBoardsSuccess(boards)));
+    apiClient.getBoards((boards) => dispatch(fetchBoardsSuccess(boards)));
   };
 }
 
 export function fetchBoard(id) {
   return function(dispatch) {
-    apiClient.getBoard(id, board => dispatch(fetchBoardSuccess(board)));
-  }
+    apiClient.getBoard(id, (board) => dispatch(fetchBoardSuccess(board)));
+  };
 }
 
 export function createBoard(board, callback) {
   return function(dispatch) {
     dispatch(createBoardRequest());
-    apiClient.createBoard(board, newBoard => {
+    apiClient.createBoard(board, (newBoard) => {
       dispatch(createBoardSuccess(newBoard));
 
       if (callback) {
@@ -80,50 +80,50 @@ export function createBoard(board, callback) {
 
 export function createList(board_id, title, callback) {
   return function(dispatch) {
-    apiClient.createList(board_id, title, newList => {
+    apiClient.createList(board_id, title, (newList) => {
       dispatch(createListSuccess(newList));
 
       if (callback) {
         callback(newList);
       }
-    })
-  }
+    });
+  };
 }
 
 export function updateList(list_id, title, callback) {
   return function(dispatch) {
-    apiClient.updateList(list_id, title, newList => {
+    apiClient.updateList(list_id, title, (newList) => {
       dispatch(updateListSuccess(newList));
 
       if (callback) {
         callback(newList);
       }
-    })
-  }
+    });
+  };
 }
 
 export function createCard(list_id, title, callback) {
   return function(dispatch) {
-    apiClient.createCard(list_id, title, newCard => {
+    apiClient.createCard(list_id, title, (newCard) => {
       dispatch(createCardSuccess(newCard));
 
       if (callback) {
         callback(newCard);
       }
-    })
-  }
+    });
+  };
 }
 
 export function updateCard(card_id, newAttrs, callback) {
   return function(dispatch) {
-    apiClient.updateCard(card_id, newAttrs, newCard => {
+    apiClient.updateCard(card_id, newAttrs, (newCard) => {
       dispatch(fetchCardSuccess(newCard));
 
       if (callback) {
         callback(newCard);
       }
     });
-  }
+  };
 }
 
 export function updateCardTitle(card_id, title, callback) {
@@ -142,21 +142,21 @@ export function addCommentSuccess(comment) {
   return {
     type: types.CREATE_COMMENT_SUCCESS,
     payload: {
-      comment
-    }
-  } 
+      comment,
+    },
+  };
 }
 
 export function addComment(card_id, comment, callback) {
   return function(dispatch) {
-    apiClient.addComment(card_id, comment, newComment => {
+    apiClient.addComment(card_id, comment, (newComment) => {
       dispatch(addCommentSuccess(newComment));
 
       if (callback) {
         callback(newComment);
       }
     });
-  }
+  };
 }
 
 export function fetchCardSuccess(card) {
@@ -165,6 +165,6 @@ export function fetchCardSuccess(card) {
 
 export function fetchCard(id) {
   return function(dispatch) {
-    apiClient.fetchCard(id, card => dispatch(fetchCardSuccess(card)));
-  }
+    apiClient.fetchCard(id, (card) => dispatch(fetchCardSuccess(card)));
+  };
 }

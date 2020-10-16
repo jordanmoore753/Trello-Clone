@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { getDateDetails } from "../../lib/viewHelpers";
+import { getDateDetails } from '../../lib/viewHelpers';
 
 function CardTile({ card }) {
   return (
@@ -8,7 +8,7 @@ function CardTile({ card }) {
       <div className="card ">
         <i className="edit-toggle edit-icon sm-icon"></i>
         <div className="card-info">
-          {card.labels.map(label => {
+          {card.labels.map((label) => {
             return <div className={`card-label ${label} colorblindable`}></div>;
           })}
           <p>{card.title}</p>
@@ -16,7 +16,7 @@ function CardTile({ card }) {
         <div className="card-icons">
           {card.due_date && (
             <i
-              className={"clock-icon sm-icon " + getDateDetails(card).className}
+              className={'clock-icon sm-icon ' + getDateDetails(card).className}
             >
               {getDateDetails(card).formattedDueDate}
             </i>

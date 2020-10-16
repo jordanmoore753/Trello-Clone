@@ -1,12 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import DescriptionFormContainer from "./DescriptionFormContainer.jsx";
-import DetailsSection from "./DetailsSection.js";
-import CommentFormContainer from "./CommentFormContainer.jsx";
-import ActivityListContainer from "./ActivityListContainer.jsx";
-import AddSidebar from "./Add.jsx";
-import ActionsSidebarContainer from "./ActionsSidebarContainer.jsx";
-import HeaderContainer from "./HeaderContainer.jsx";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import DescriptionFormContainer from './DescriptionFormContainer.jsx';
+import DetailsSection from './DetailsSection.jsx';
+import CommentFormContainer from './CommentFormContainer.jsx';
+import ActivityListContainer from './ActivityListContainer.jsx';
+import AddSidebar from './Add.jsx';
+import ActionsSidebarContainer from './ActionsSidebarContainer.jsx';
+import HeaderContainer from './HeaderContainer.jsx';
 
 class Card extends React.Component {
   state = {};
@@ -20,14 +20,12 @@ class Card extends React.Component {
             <Link to={`/boards/${this.props.boardId}`}>
               <i className="x-icon icon close-modal"></i>
             </Link>
-            { this.props.card.archived ? (
+            {this.props.card.archived ? (
               <div className="archived-banner">
                 <i className="file-icon icon"></i>
                 This card is archived.
               </div>
-            ) : (
-              null
-            )}
+            ) : null}
             <HeaderContainer list={this.props.list} card={this.props.card} />
             <section className="modal-main">
               <ul className="modal-outer-list">
@@ -45,7 +43,7 @@ class Card extends React.Component {
             </section>
             <aside className="modal-buttons">
               <AddSidebar />
-              <ActionsSidebarContainer 
+              <ActionsSidebarContainer
                 archived={this.props.card.archived}
                 cardId={this.props.card.id}
                 boardId={this.props.boardId}

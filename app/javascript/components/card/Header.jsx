@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 class Header extends React.Component {
   state = {
-    title: this.props.card.title
-  }
+    title: this.props.card.title,
+  };
 
   handleTitleChange = (event) => {
     if (event.key && event.key === 'Enter') return;
@@ -11,28 +11,28 @@ class Header extends React.Component {
     const value = event.target.value;
 
     this.setState({
-      title: value
-    })
-  }
+      title: value,
+    });
+  };
 
   handleTitleSubmit = (event) => {
     if (this.state.title.length === 0) return;
     this.props.onSubmit(this.state.title);
-  }
+  };
 
   handleKeyDown = (event) => {
     if (event.key && event.key !== 'Enter') return;
 
     event.target.blur();
-  }
+  };
 
   render() {
     return (
       <header>
         <i className="card-icon icon .close-modal"></i>
-        <textarea 
-          className="list-title" 
-          style={{ height: "45px" }}
+        <textarea
+          className="list-title"
+          style={{ height: '45px' }}
           onChange={this.handleTitleChange}
           value={this.state.title}
           onBlur={this.handleTitleSubmit}
@@ -41,7 +41,8 @@ class Header extends React.Component {
           {this.state.title}
         </textarea>
         <p>
-          in list <a className="link">{this.props.list && this.props.list.title}</a>
+          in list{' '}
+          <a className="link">{this.props.list && this.props.list.title}</a>
           <i className="sub-icon sm-icon"></i>
         </p>
       </header>
