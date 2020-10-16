@@ -1,22 +1,14 @@
 import React from 'react';
+import LabelsContainer from './LabelsContainer';
 
 import { getDateDetails } from '../../lib/viewHelpers';
 
 const DetailsSection = (props) => (
   <ul className="modal-details-list">
     <li className="labels-section">
-      <h3>Labels</h3>
-      { props.card.labels.map(label => {
-        return (
-          <div className="member-container">
-            <div className={`${label} label colorblindable`}></div>
-          </div>
-        );
-      })}
-      
-      <div className="member-container">
-        <i className="plus-icon sm-icon"></i>
-      </div>
+      <LabelsContainer 
+        cardId={props.card.id}
+      />
     </li>
     <li className="due-date-section">
       <h3>Due Date</h3>

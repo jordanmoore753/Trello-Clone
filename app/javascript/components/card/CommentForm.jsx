@@ -30,7 +30,6 @@ class CommentSection extends React.Component {
                 rows="1"
                 placeholder="Write a comment..."
                 onChange={this.handleCommentChange}
-                required={true}
               >
                 {this.state.comment}
               </textarea>

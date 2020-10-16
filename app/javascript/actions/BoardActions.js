@@ -126,6 +126,10 @@ export function updateCard(card_id, newAttrs, callback) {
   };
 }
 
+export function updateCardLabels(card_id, labels, callback) {
+  return updateCard(card_id, { labels }, callback);
+}
+
 export function updateCardTitle(card_id, title, callback) {
   return updateCard(card_id, { title }, callback);
 }

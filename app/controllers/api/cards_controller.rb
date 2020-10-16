@@ -51,7 +51,7 @@ class Api::CardsController < ApplicationController
       :completed,
       :archived,
       :due_date,
-      :labels)
+      :labels => [])
   end
 
   def create_actions

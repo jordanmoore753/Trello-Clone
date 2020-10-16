@@ -24,12 +24,25 @@ export default function cards(state = [], action) {
       let cards = state.filter((card) => card.id !== action.payload.id);
       let { board_id, ...cardWithoutBoardId } = action.payload;
       return cards.concat(cardWithoutBoardId);
-    case 'CREATE_COMMENT_SUCCESS':
+    case 'CREATE_COMMENT_SUCCESS': {
       let comment = action.payload.comment;
-    // STRIP STUFF FROM COMMENT
-    // FIND CARD
-    // ADD TO CARD
-    // RETURN STATE
+
+      let card;
+
+      let cards = state.filter((thisCard) => {
+        if (comment.card_id === thisCard.id) {
+          card = Object.assign({}, thisCard);
+          return false;
+        } else {
+          return true;
+        }
+      });
+
+      card.comments = [...card.comments, comment];
+
+      return [...cards, card];
+    }
+
     default:
       return state;
   }
